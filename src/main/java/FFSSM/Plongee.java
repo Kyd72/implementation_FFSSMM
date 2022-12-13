@@ -18,7 +18,7 @@ public class Plongee {
 
 	public int duree;
 
-	private List<Plongeur> listePlongeurs;
+	private final List<Plongeur> listePlongeurs;
 
 	public Plongee(Site lieu, Moniteur chefDePalanquee, LocalDate date, int profondeur, int duree) {
 		this.lieu = lieu;
@@ -45,16 +45,20 @@ public class Plongee {
 	 */
 	public boolean estConforme() {
 
-		boolean estConforme =true;
+		boolean estConforme = listePlongeurs.size() != 0;
+
 
 		for (Plongeur plongeur : listePlongeurs){
 
 
-				estConforme= estConforme && plongeur.derniereLicence().estValide(this.date);
+				if (!plongeur.derniereLicence().estValide(this.date)){
+					estConforme=false;
+
+				}
 
 		}
 
-		return estConforme && !listePlongeurs.isEmpty();
+		return estConforme;
 	}
 
 	@Override

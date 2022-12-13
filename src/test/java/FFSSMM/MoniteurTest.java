@@ -102,17 +102,19 @@ public void SetUp(){
     void TestPlongee() {
 
         Plongee p = new Plongee(site,untel,d2,5,3);
+        LocalDate twoYearsLater = d2.plusYears(2);
+        Plongee p2 = new Plongee(site,untel,twoYearsLater,5,3);
         assertFalse(p.estConforme(), "une plongée sans participant n'est pas conforme");
 
 
 
         QuatreTel.ajouteLicence("123456789", d1,c1);
         p.ajouteParticipant(QuatreTel);
-        assertTrue(p.estConforme(), "une plongée avec participant avec licence est  conforme");
+        assertTrue(p.estConforme(), "une plongée avec participant possédant licence est  conforme");
 
-        Plongee p2 = new Plongee(site,untel,d2.plusYears(2),5,3);
+
         p2.ajouteParticipant(QuatreTel);
-        assertFalse(p.estConforme(), "une plongée avec participant ayant une licence expirée n'est pas conforme");
+        assertFalse(p2.estConforme(), "une plongée avec participant ayant une licence expirée n'est pas conforme");
 
 
 

@@ -24,21 +24,7 @@ public class Licence implements Comparable{
         this.club = club;
     }
 
-    public Personne getPossesseur() {
-        return possesseur;
-    }
 
-    public String getNumero() {
-        return numero;
-    }
-
-    public LocalDate getDelivrance() {
-        return delivrance;
-    }
-
-    public Club getClub() {
-        return club;
-    }
 
     /**
      * Est-ce que la licence est valide à la date indiquée ?
@@ -48,8 +34,7 @@ public class Licence implements Comparable{
      **/
     public boolean estValide(LocalDate d) {
          LocalDate fin = delivrance.plus(1, ChronoUnit.YEARS);
-
-         return d.isBefore(fin) && d.isAfter(delivrance);
+         return (d.isBefore(fin) && d.isAfter(delivrance));
     }
 
     @Override
