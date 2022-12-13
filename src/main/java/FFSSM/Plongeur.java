@@ -41,6 +41,7 @@ public class Plongeur extends Personne {
         this.listeLicence.add(new Licence(this, numero, delivrance, club));
     }
     public Licence derniereLicence() {
+
         return listeLicence.last();
     }
 

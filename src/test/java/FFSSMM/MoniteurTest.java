@@ -104,8 +104,6 @@ public void SetUp(){
         Plongee p = new Plongee(site,untel,d2,5,3);
         assertFalse(p.estConforme(), "une plongée sans participant n'est pas conforme");
 
-        p.ajouteParticipant(QuatreTel);
-        assertFalse(p.estConforme(), "une plongée avec participant sans licence n'est pas conforme");
 
 
         QuatreTel.ajouteLicence("123456789", d1,c1);

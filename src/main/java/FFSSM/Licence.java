@@ -5,8 +5,9 @@ package FFSSM;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.Objects;
 
-public class Licence {
+public class Licence implements Comparable{
 
     private Personne possesseur;
 
@@ -51,4 +52,21 @@ public class Licence {
          return d.isBefore(fin) && d.isAfter(delivrance);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Licence licence = (Licence) o;
+        return possesseur.equals(licence.possesseur) && numero.equals(licence.numero) && delivrance.equals(licence.delivrance) && club.equals(licence.club);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(possesseur, numero, delivrance, club);
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
+    }
 }
