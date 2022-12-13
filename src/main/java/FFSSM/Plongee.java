@@ -4,8 +4,7 @@
 package FFSSM;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Plongee {
 
@@ -19,17 +18,19 @@ public class Plongee {
 
 	public int duree;
 
+	private List<Plongeur> listePlongeurs;
+
 	public Plongee(Site lieu, Moniteur chefDePalanquee, LocalDate date, int profondeur, int duree) {
 		this.lieu = lieu;
 		this.chefDePalanquee = chefDePalanquee;
 		this.date = date;
 		this.profondeur = profondeur;
 		this.duree = duree;
+		this.listePlongeurs=new ArrayList<>();
 	}
 
 	public void ajouteParticipant(Plongeur participant) {
-		// TODO: Implémenter cette méthode
-		throw new UnsupportedOperationException("Pas encore implémenté");
+		listePlongeurs.add(participant);
 	}
 
 	public LocalDate getDate() {
@@ -43,8 +44,29 @@ public class Plongee {
 	 * @return vrai si la plongée est conforme
 	 */
 	public boolean estConforme() {
-		// TODO: Implémenter cette méthode
-		throw new UnsupportedOperationException("Pas encore implémenté");
+
+		boolean estConforme =true;
+
+		for (Plongeur plongeur : listePlongeurs){
+
+
+				estConforme= estConforme && plongeur.derniereLicence().estValide(this.date);
+
+		}
+
+		return estConforme && !listePlongeurs.isEmpty();
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Plongee plongee = (Plongee) o;
+		return profondeur == plongee.profondeur && duree == plongee.duree && lieu.equals(plongee.lieu) && chefDePalanquee.equals(plongee.chefDePalanquee) && date.equals(plongee.date) && listePlongeurs.equals(plongee.listePlongeurs);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(lieu, chefDePalanquee, date, profondeur, duree, listePlongeurs);
+	}
 }

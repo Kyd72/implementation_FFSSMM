@@ -1,6 +1,7 @@
 package FFSSM;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class Embauche {
 
@@ -23,8 +24,13 @@ public class Embauche {
      * @param dateFin la date à laquelle cette embauche est terminée
      */
     public void terminer(LocalDate dateFin) {
-         // TODO: Implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");	    
+        if(ChronoUnit.DAYS.between(debut,dateFin)>0) {
+            this.fin=dateFin;
+
+        }
+
+        else throw new IllegalArgumentException();
+
     }
     
     /**
@@ -40,7 +46,10 @@ public class Embauche {
      * @return the value of employeur
      */
     public Club getEmployeur() {
-        return employeur;
+
+
+        if (fin == null) {return employeur;}
+        else return null;
     }
 
     /**

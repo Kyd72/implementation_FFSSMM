@@ -9,18 +9,21 @@ import java.util.Set;
 public class Club {
 
  
-    public Moniteur president;
+    private Moniteur president;
 
-    public String nom;
+    private String nom;
 
-    public String adresse;
+    private String adresse;
 
-    public String telephone;
+    private String telephone;
 
-    public Club(Moniteur président, String nom, String telephone) {
-        this.president = président;
+    private  Set<Plongee> activites ;
+
+    public Club(Moniteur president, String nom, String telephone) {
+        this.president = president;
         this.nom = nom;
         this.telephone = telephone;
+        this.activites= new HashSet<>() ;
     }
 
     /**
@@ -30,8 +33,14 @@ public class Club {
      * @return l'ensemble des plongées non conformes
      */
     public Set<Plongee> plongeesNonConformes() {
-         // TODO: Implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");
+        HashSet<Plongee> plongeeNonConformes= new HashSet<Plongee> ();
+        for (Plongee plongee: this.activites){
+            if(!plongee.estConforme()){
+                plongeeNonConformes.add(plongee);
+            }
+        }
+
+        return plongeeNonConformes;
     }
 
     /**
@@ -39,8 +48,7 @@ public class Club {
      * @param p la nouvelle plongée
      */
     public void organisePlongee(Plongee p) {
-         // TODO: Implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");
+        this.activites.add(p);;
     }
     
     
